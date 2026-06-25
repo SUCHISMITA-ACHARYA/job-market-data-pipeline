@@ -71,8 +71,7 @@ def transform_data(df):
 
     print("Cleaned dataset saved successfully!")
     logger.info("Cleaned dataset saved to data/cleaned/cleaned_jobs.csv")
- 
-
+    
     skills = [
         "Python",
         "SQL",
@@ -97,12 +96,28 @@ def transform_data(df):
     ]
 
     for skill in skills:
-
-        column_name = "has_" + skill.lower().replace(" ", "_").replace("+", "p")
+        if skill == "C++":
+            column_name = "has_cpp"
+        elif skill == "C#":
+            column_name = "has_csharp"
+        else:
+            column_name = "has_" + skill.lower().replace(" ", "_")
 
         df[column_name] = df["job_description"].str.contains(
             skill,
             case=False,
             na=False
         )
+
+    print("Transformation Complete!")
+    logger.info("Data transformation completed successfully.")
+
+    df.to_csv(
+        "../data/cleaned/cleaned_jobs.csv",
+        index=False
+    )
+
+    print("Cleaned dataset saved successfully!")
+    logger.info("Cleaned dataset saved to data/cleaned/cleaned_jobs.csv")
+
     return df
