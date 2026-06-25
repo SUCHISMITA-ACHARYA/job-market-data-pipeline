@@ -24,6 +24,7 @@ SELECT
 AVG(average_salary)
 FROM jobs;
 
+
 SELECT category,
 COUNT(*)
 FROM jobs
